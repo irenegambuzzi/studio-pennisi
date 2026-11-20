@@ -87,9 +87,36 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    window.matchMedia("(min-width: 901px)").addEventListener("change", (e) => {
+    window.matchMedia("(min-width: 1101px)").addEventListener("change", (e) => {
       if (e.matches) setMenu(false);
     });
+  }
+
+  // Ombra leggera sotto l'header quando la pagina scorre
+  const header = document.querySelector(".site-header");
+  if (header) {
+    const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  // Comparsa delle sezioni al passaggio
+  const revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+    );
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add("is-visible"));
   }
 
   // Scorrimento alle sezioni (senza animazione se l'utente la riduce)

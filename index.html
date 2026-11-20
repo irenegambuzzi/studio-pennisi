@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Studio Legale - Avv. Sonia Pennisi</title>
   <meta name="description" content="Avv. Sonia Pennisi - Consulenza e assistenza legale in diritto civile, responsabilità civile, recupero crediti, diritto di famiglia e del lavoro. Studio Legale a Mirandola (MO).">
+  <script>document.documentElement.classList.replace("no-js", "js");</script>
 
   <!-- Anteprima social (WhatsApp, Facebook, LinkedIn, X) -->
   <meta property="og:type" content="website">
@@ -21,7 +22,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
@@ -75,33 +76,57 @@
         <a href="#reviews">Recensioni</a>
         <a href="#contact">Contatti</a>
       </nav>
+      <a href="#contact" class="header-cta">Appuntamento</a>
     </div>
   </header>
 
+  <main>
   <!-- Hero -->
   <section id="hero" class="hero">
     <div class="container hero-grid">
-      <div class="hero-text">
-        <p class="hero-eyebrow">Studio legale</p>
-        <h1>Avv. Sonia Pennisi</h1>
+      <div class="hero-text reveal">
+        <p class="eyebrow">Studio legale · Mirandola (MO)</p>
+        <h1 class="hero-title">
+          <span class="hero-title-pre">Avv.</span>
+          <span class="hero-title-name">Sonia</span>
+          <span class="hero-title-name">Pennisi</span>
+        </h1>
         <p class="hero-sub">Consulenza e assistenza legale civile e familiare a Mirandola</p>
-        <a href="#contact" class="cta-btn">Richiedi un appuntamento</a>
-        <p class="hero-note">Via Pico 16, Mirandola (MO) · Si riceve solo su appuntamento</p>
+        <div class="hero-actions">
+          <a href="#contact" class="cta-btn">Richiedi un appuntamento</a>
+          <a href="tel:+39053521019" class="hero-tel">
+            <span class="hero-tel-label">Telefono</span>
+            0535 21019
+          </a>
+        </div>
+        <p class="hero-note">Via Pico 16 · Si riceve solo su appuntamento</p>
       </div>
-      <figure class="hero-photo">
+      <figure class="hero-photo reveal" style="--d:2">
         <img src="images/avvocato.jpg" width="947" height="1400" alt="Avv. Sonia Pennisi nel suo studio a Mirandola" fetchpriority="high">
       </figure>
     </div>
   </section>
 
-  <!-- Divider -->
-  <div class="section-divider" aria-hidden="true"></div>
+  <!-- Fascia aree -->
+  <div class="band">
+    <ul class="container band-list">
+      <li>Diritto Civile</li>
+      <li>Responsabilità Civile</li>
+      <li>Recupero Crediti</li>
+      <li>Contrattualistica</li>
+      <li>Separazioni e Divorzi</li>
+      <li>Diritto del Lavoro</li>
+    </ul>
+  </div>
 
   <!-- Bio -->
   <section id="about" class="bio">
     <div class="container bio-content">
-      <div class="bio-text">
+      <div class="section-head reveal">
+        <p class="section-label" aria-hidden="true">01</p>
         <h2>Il mio studio</h2>
+      </div>
+      <div class="bio-text reveal" style="--d:1">
         <p>Avvocato civilista con esperienza pluriennale, mi dedico con passione e competenza alla tutela dei diritti dei miei clienti. Il mio approccio si basa sull'ascolto attento delle esigenze di ciascuno, accompagnandolo in ogni fase del procedimento con professionalità e trasparenza.</p>
         <p>La mia formazione continua e l'aggiornamento costante mi permettono di offrire soluzioni legali efficaci e personalizzate, garantendo una difesa tempestiva e mirata per ottenere i migliori risultati possibili.</p>
         <address>
@@ -120,29 +145,38 @@
       <img src="images/lady-justice.png" alt="" aria-hidden="true">
     </div>
     <div class="container">
-      <h2>Aree di competenza</h2>
+      <div class="section-head reveal">
+        <p class="section-label" aria-hidden="true">02</p>
+        <h2>Aree di competenza</h2>
+      </div>
       <div class="areas-grid">
-        <article class="area-card">
+        <article class="area-card reveal">
+          <span class="area-num" aria-hidden="true">I</span>
           <h3>Diritto Civile</h3>
           <p>Assistenza in materia di obbligazioni, proprietà, diritti reali e successioni.</p>
         </article>
-        <article class="area-card">
+        <article class="area-card reveal" style="--d:1">
+          <span class="area-num" aria-hidden="true">II</span>
           <h3>Responsabilità Civile</h3>
           <p>Tutela del danno ingiusto e risarcimento in casi di illeciti civili.</p>
         </article>
-        <article class="area-card">
+        <article class="area-card reveal" style="--d:2">
+          <span class="area-num" aria-hidden="true">III</span>
           <h3>Recupero Crediti</h3>
           <p>Procedure legali per il recupero di crediti commerciali e finanziari.</p>
         </article>
-        <article class="area-card">
+        <article class="area-card reveal">
+          <span class="area-num" aria-hidden="true">IV</span>
           <h3>Contrattualistica</h3>
           <p>Redazione, analisi e contestazione di contratti di ogni tipologia.</p>
         </article>
-        <article class="area-card">
+        <article class="area-card reveal" style="--d:1">
+          <span class="area-num" aria-hidden="true">V</span>
           <h3>Separazioni e Divorzi</h3>
           <p>Assistenza nelle procedure di separazione, divorzio e diritto di famiglia.</p>
         </article>
-        <article class="area-card">
+        <article class="area-card reveal" style="--d:2">
+          <span class="area-num" aria-hidden="true">VI</span>
           <h3>Diritto del Lavoro</h3>
           <p>Consulenza e assistenza in controversie lavorative e licenziamenti.</p>
         </article>
@@ -153,19 +187,22 @@
   <!-- Primo appuntamento -->
   <section id="primo-appuntamento" class="steps">
     <div class="container">
-      <h2>Come funziona il primo appuntamento</h2>
+      <div class="section-head reveal">
+        <p class="section-label" aria-hidden="true">03</p>
+        <h2>Come funziona il primo appuntamento</h2>
+      </div>
       <ol class="steps-grid">
-        <li class="step-card">
+        <li class="step-card reveal">
           <span class="step-num" aria-hidden="true">1</span>
           <h3>Il primo contatto</h3>
           <p><a href="tel:+39053521019">Telefona</a>, scrivi un'<a href="mailto:avvocato@studiolegalepennisi.com">email</a> o compila il <a href="#contact">modulo di contatto</a> per fissare un appuntamento. Lo studio riceve solo su appuntamento.</p>
         </li>
-        <li class="step-card">
+        <li class="step-card reveal" style="--d:1">
           <span class="step-num" aria-hidden="true">2</span>
           <h3>Il colloquio in studio</h3>
           <p>Ascolto la tua situazione ed esaminiamo insieme la documentazione. Porta con te tutti i documenti che riguardano la questione.</p>
         </li>
-        <li class="step-card">
+        <li class="step-card reveal" style="--d:2">
           <span class="step-num" aria-hidden="true">3</span>
           <h3>Le possibili strade</h3>
           <p>Ti spiego con chiarezza le opzioni percorribili e i relativi costi, prima di procedere.</p>
@@ -177,20 +214,45 @@
   <!-- Recensioni -->
   <section id="reviews" class="reviews">
     <div class="container reviews-inner">
-      <h2>Recensioni</h2>
-      <p>Le opinioni di chi si è affidato allo studio, raccolte su Google.</p>
-      <a href="https://www.google.com/maps?cid=15870159052896191363" class="btn-outline" target="_blank" rel="noopener noreferrer">
-        Leggi le recensioni su Google<span class="visually-hidden"> (si apre in una nuova scheda)</span>
-        <svg class="icon-external" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="16" height="16"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+      <div class="section-head reveal">
+        <p class="section-label" aria-hidden="true">04</p>
+        <h2>Recensioni</h2>
+      </div>
+      <div class="reviews-body reveal" style="--d:1">
+        <p>Le opinioni di chi si è affidato allo studio, raccolte su Google.</p>
+        <a href="https://www.google.com/maps?cid=15870159052896191363" class="btn-outline" target="_blank" rel="noopener noreferrer">
+          Leggi le recensioni su Google<span class="visually-hidden"> (si apre in una nuova scheda)</span>
+          <svg class="icon-external" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="16" height="16"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- Contatti -->
   <section id="contact" class="contact">
-    <div class="container">
-      <h2>Contatti</h2>
-      <form id="contactForm">
+    <div class="container contact-grid">
+      <div class="contact-info reveal">
+        <div class="section-head">
+          <p class="section-label" aria-hidden="true">05</p>
+          <h2>Contatti</h2>
+        </div>
+        <dl class="contact-list">
+          <div>
+            <dt>Telefono</dt>
+            <dd><a href="tel:+39053521019">0535 21019</a></dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd class="contact-email"><a href="mailto:avvocato@studiolegalepennisi.com">avvocato@studiolegalepennisi.com</a></dd>
+          </div>
+          <div>
+            <dt>Studio</dt>
+            <dd>Via Pico 16, Mirandola (MO)</dd>
+          </div>
+        </dl>
+        <p class="contact-note">Si riceve solo su appuntamento</p>
+      </div>
+      <form id="contactForm" class="reveal" style="--d:1">
         <div class="form-group">
           <label for="name">Nome e Cognome *</label>
           <input type="text" id="name" name="name" required placeholder="Il tuo nome completo">
@@ -221,6 +283,7 @@
       </form>
     </div>
   </section>
+  </main>
 
   <!-- Footer -->
   <footer>
