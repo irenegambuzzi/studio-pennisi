@@ -5,7 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Studio Legale - Avv. Sonia Pennisi</title>
   <meta name="description" content="Avv. Sonia Pennisi - Consulenza e assistenza legale in diritto civile, responsabilità civile, recupero crediti, diritto di famiglia e del lavoro. Studio Legale a Mirandola (MO).">
-  <script>document.documentElement.classList.replace("no-js", "js");</script>
+  <script>
+    (function () {
+      var html = document.documentElement;
+      html.classList.replace("no-js", "js");
+      // Intro con il logo: una sola volta per sessione, mai con "movimento ridotto" o arrivando da un link interno
+      try {
+        if (!sessionStorage.getItem("intro-seen") && !location.hash &&
+            !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          html.classList.add("intro");
+        }
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- Anteprima social (WhatsApp, Facebook, LinkedIn, X) -->
   <meta property="og:type" content="website">
@@ -41,12 +53,24 @@
   </script>
 </head>
 <body>
+  <!-- Intro: la bilancia che trova l'equilibrio (il logo originale diviso in livelli) -->
+  <div class="intro-overlay" aria-hidden="true">
+    <div class="intro-logo">
+      <img class="il il-post" src="images/logo.png" alt="">
+      <img class="il il-beam" src="images/logo.png" alt="">
+      <img class="il il-laurel-l" src="images/logo.png" alt="">
+      <img class="il il-laurel-r" src="images/logo.png" alt="">
+      <img class="il il-sp" src="images/logo.png" alt="">
+      <img class="il il-name" src="images/logo.png" alt="">
+    </div>
+  </div>
+
   <!-- Cookie banner -->
   <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Informativa cookie">
     <div class="cookie-content">
       <h3>Informativa sui Cookie</h3>
       <p>
-        Utilizziamo cookie tecnici per il funzionamento del sito e, previo tuo consenso, cookie di analisi. Cliccando "Accetta Tutti" acconsenti all'uso di tutti i cookie. Cliccando "Rifiuta" manterrai le impostazioni di default (solo tecnici).
+        Utilizziamo cookie tecnici per il funzionamento del sito e, previo tuo consenso, cookie di analisi e il widget delle recensioni Google (servizio di terze parti). Cliccando "Accetta Tutti" acconsenti all'uso di tutti i cookie. Cliccando "Rifiuta" manterrai le impostazioni di default (solo tecnici).
       </p>
       <div class="cookie-buttons">
         <button type="button" onclick="handleCookies('all')" class="btn-accept">Accetta Tutti</button>
@@ -226,6 +250,16 @@
         </a>
       </div>
     </div>
+
+    <!-- Widget recensioni Google (Elfsight): si carica solo dopo "Accetta Tutti" -->
+    <div class="container reviews-widget">
+      <div class="reviews-consent">
+        <p>Le recensioni sono mostrate da un servizio esterno (Elfsight) che usa cookie di terze parti, quindi compaiono qui solo se accetti tutti i cookie.</p>
+        <button type="button" class="btn-text js-cookie-prefs">Modifica le preferenze cookie</button>
+      </div>
+      <div class="elfsight-app-b5f14944-ba35-40d6-bdd1-84d76ddc5d5a" data-elfsight-app-lazy></div>
+      <script type="text/plain" data-cookiecategory="thirdparty" async src="https://elfsightcdn.com/platform.js"></script>
+    </div>
   </section>
 
   <!-- Contatti -->
@@ -293,7 +327,7 @@
       </div>
       <div class="footer-info">
         <p>© <span id="currentYear">2026</span> Studio Legale Avv. Sonia Pennisi - Via Pico 16, Mirandola (MO)</p>
-        <p>P.I. 02638140364 | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookie-policy.html">Cookie Policy</a></p>
+        <p>P.I. 02638140364 | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookie-policy.html">Cookie Policy</a> | <button type="button" class="btn-text js-cookie-prefs">Preferenze cookie</button></p>
         <p>Si riceve solo su appuntamento</p>
         <p>Email: <a href="mailto:avvocato@studiolegalepennisi.com">avvocato@studiolegalepennisi.com</a></p>
         <p>Tel: <a href="tel:+39053521019">0535 21019</a></p>

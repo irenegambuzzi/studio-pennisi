@@ -100,24 +100,91 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  // Comparsa delle sezioni al passaggio
-  const revealEls = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
-    );
-    revealEls.forEach((el) => io.observe(el));
-  } else {
-    revealEls.forEach((el) => el.classList.add("is-visible"));
+  // Bottoni "Preferenze cookie": riaprono il banner
+  document.querySelectorAll(".js-cookie-prefs").forEach((btn) => {
+    btn.addEventListener("click", openCookieBanner);
+  });
+
+  const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  // Comparsa delle sezioni al passaggio (parte dopo l'intro, se c'è)
+  function startReveal() {
+    const revealEls = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+      );
+      revealEls.forEach((el) => io.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add("is-visible"));
+    }
   }
+
+  runIntro(startReveal);
+
+  // Effetti legati allo scroll: la Giustizia che si "stampa" e il percorso del primo appuntamento
+  const areasSection = document.getElementById("areas");
+  const stepsGrid = document.querySelector(".steps-grid");
+  const stepCards = stepsGrid ? stepsGrid.querySelectorAll(".step-card") : [];
+  const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+  let ticking = false;
+
+  function updateScrollEffects() {
+    ticking = false;
+    const vh = window.innerHeight;
+
+    if (areasSection) {
+      const r = areasSection.getBoundingClientRect();
+      // 0 quando la sezione entra dal basso, oltre 1 quando è ben dentro lo schermo
+      const ink = clamp((vh * 0.95 - r.top) / (vh * 0.85), 0, 1.25);
+      areasSection.style.setProperty("--ink", ink.toFixed(3));
+    }
+
+    if (stepsGrid) {
+      const r = stepsGrid.getBoundingClientRect();
+      const p = clamp((vh * 0.85 - r.top) / (r.height + vh * 0.25), 0, 1);
+      stepsGrid.style.setProperty("--p", p.toFixed(3));
+      const vertical = window.innerWidth <= 900;
+      const size = vertical ? stepsGrid.offsetHeight : stepsGrid.offsetWidth;
+      stepCards.forEach((card) => {
+        const offset = vertical ? card.offsetTop : card.offsetLeft;
+        card.classList.toggle("is-lit", p * size >= offset + 30);
+      });
+    }
+  }
+
+  function requestScrollEffects() {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(updateScrollEffects);
+    }
+  }
+
+  function setupScrollEffects() {
+    if (reduceMotionQuery.matches) {
+      // Movimento ridotto: tutto già visibile e "acceso", nessun effetto allo scroll
+      if (areasSection) areasSection.style.removeProperty("--ink");
+      if (stepsGrid) stepsGrid.style.removeProperty("--p");
+      stepCards.forEach((card) => card.classList.add("is-lit"));
+      window.removeEventListener("scroll", requestScrollEffects);
+      window.removeEventListener("resize", requestScrollEffects);
+      return;
+    }
+    window.addEventListener("scroll", requestScrollEffects, { passive: true });
+    window.addEventListener("resize", requestScrollEffects);
+    updateScrollEffects();
+  }
+
+  setupScrollEffects();
+  reduceMotionQuery.addEventListener("change", setupScrollEffects);
 
   // Scorrimento alle sezioni (senza animazione se l'utente la riduce)
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -153,6 +220,7 @@ function checkCookieConsent() {
 function handleCookies(choice) {
   const banner = document.getElementById("cookieBanner");
   if (banner) banner.style.display = "none";
+  const previous = localStorage.getItem("cookie-consent");
 
   if (choice === 'all') {
     localStorage.setItem("cookie-consent", "accepted");
@@ -160,13 +228,27 @@ function handleCookies(choice) {
     showToast("🍪 Cookie accettati. Grazie!");
   } else {
     localStorage.setItem("cookie-consent", "rejected");
+    if (previous === "accepted") {
+      // Consenso revocato: ricarico la pagina così Analytics e il widget non restano attivi
+      window.location.reload();
+      return;
+    }
     showToast("🍪 Hai rifiutato i cookie non essenziali.");
   }
 }
 
+// Riapre il banner per cambiare scelta (link "Preferenze cookie")
+function openCookieBanner() {
+  const banner = document.getElementById("cookieBanner");
+  if (!banner) return;
+  banner.style.display = "block";
+  const first = banner.querySelector("button");
+  if (first) first.focus();
+}
+
 function activateScripts() {
-  // Trova tutti gli script con data-cookiecategory="analytics" e li attiva
-  const scripts = document.querySelectorAll('script[data-cookiecategory="analytics"]');
+  // Attiva gli script bloccati: Analytics (analytics) e widget recensioni (thirdparty)
+  const scripts = document.querySelectorAll('script[data-cookiecategory]');
 
   scripts.forEach(script => {
     // Crea un nuovo elemento script
@@ -181,6 +263,41 @@ function activateScripts() {
     script.parentNode.insertBefore(newScript, script);
     script.remove(); // Rimuove il placeholder
   });
+
+  // Il widget recensioni è attivo: nasconde l'avviso al suo posto
+  document.documentElement.classList.add("consent-all");
+}
+
+/* Intro con il logo */
+function runIntro(done) {
+  const html = document.documentElement;
+  const overlay = document.querySelector(".intro-overlay");
+  if (!html.classList.contains("intro") || !overlay) {
+    if (overlay) overlay.remove();
+    done();
+    return;
+  }
+
+  let finished = false;
+  const skipEvents = ["click", "keydown", "wheel", "touchstart"];
+
+  function finish() {
+    if (finished) return;
+    finished = true;
+    clearTimeout(timer);
+    skipEvents.forEach((ev) => window.removeEventListener(ev, finish));
+    try { sessionStorage.setItem("intro-seen", "1"); } catch (e) {}
+    overlay.classList.add("is-leaving");
+    done();
+    setTimeout(() => {
+      html.classList.remove("intro");
+      overlay.remove();
+    }, 900);
+  }
+
+  // Dura circa 2,3 secondi; un clic, un tasto o lo scroll la saltano
+  const timer = setTimeout(finish, 2300);
+  skipEvents.forEach((ev) => window.addEventListener(ev, finish, { passive: true }));
 }
 
 /* Toast */
