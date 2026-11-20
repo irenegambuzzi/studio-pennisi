@@ -204,7 +204,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* Cookie functions */
+const CONSENT_MAX_AGE = 365 * 24 * 60 * 60 * 1000; // la scelta vale 1 anno (come dice la cookie policy)
+
 function checkCookieConsent() {
+  // Scaduto l'anno (o scelta salvata prima di questa regola) il banner si ripresenta
+  const savedAt = Number(localStorage.getItem("cookie-consent-date"));
+  if (!savedAt || Date.now() - savedAt > CONSENT_MAX_AGE) {
+    localStorage.removeItem("cookie-consent");
+  }
   const consent = localStorage.getItem("cookie-consent");
   if (consent === "accepted") {
     activateScripts();
@@ -221,6 +228,7 @@ function handleCookies(choice) {
   const banner = document.getElementById("cookieBanner");
   if (banner) banner.style.display = "none";
   const previous = localStorage.getItem("cookie-consent");
+  localStorage.setItem("cookie-consent-date", String(Date.now()));
 
   if (choice === 'all') {
     localStorage.setItem("cookie-consent", "accepted");
