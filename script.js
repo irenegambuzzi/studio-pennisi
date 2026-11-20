@@ -50,14 +50,61 @@ document.addEventListener("DOMContentLoaded", () => {
   // Mostra banner cookie se non accettato
   checkCookieConsent();
 
-  // Smooth scroll nav (esistente)
+  // Anno corrente nel footer (nell'HTML resta 2026 come fallback)
+  const yearEl = document.getElementById("currentYear");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Menù mobile (hamburger)
+  const navToggle = document.querySelector(".nav-toggle");
+  const navMenu = document.getElementById("site-nav");
+
+  function setMenu(open) {
+    if (!navToggle || !navMenu) return;
+    navToggle.setAttribute("aria-expanded", String(open));
+    navToggle.setAttribute("aria-label", open ? "Chiudi il menù" : "Apri il menù");
+    navMenu.classList.toggle("is-open", open);
+  }
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener("click", () => {
+      setMenu(navToggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && navMenu.classList.contains("is-open")) {
+        setMenu(false);
+        navToggle.focus();
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        navMenu.classList.contains("is-open") &&
+        !navMenu.contains(e.target) &&
+        !navToggle.contains(e.target)
+      ) {
+        setMenu(false);
+      }
+    });
+
+    window.matchMedia("(min-width: 901px)").addEventListener("change", (e) => {
+      if (e.matches) setMenu(false);
+    });
+  }
+
+  // Scorrimento alle sezioni (senza animazione se l'utente la riduce)
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
-      e.preventDefault();
       const target = document.querySelector(this.getAttribute("href"));
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth" });
-      }
+      if (!target) return;
+      e.preventDefault();
+      setMenu(false);
+      target.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth" });
+      // Porta il focus della tastiera sulla sezione raggiunta
+      if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+      target.focus({ preventScroll: true });
     });
   });
 });
@@ -93,11 +140,11 @@ function handleCookies(choice) {
 function activateScripts() {
   // Trova tutti gli script con data-cookiecategory="analytics" e li attiva
   const scripts = document.querySelectorAll('script[data-cookiecategory="analytics"]');
-  
+
   scripts.forEach(script => {
     // Crea un nuovo elemento script
     const newScript = document.createElement('script');
-    
+
     // Copia gli attributi (tranne type che diventa default JS)
     if (script.src) newScript.src = script.src;
     if (script.innerHTML) newScript.innerHTML = script.innerHTML;
@@ -107,16 +154,13 @@ function activateScripts() {
     script.parentNode.insertBefore(newScript, script);
     script.remove(); // Rimuove il placeholder
   });
-
-  // Nasconde il placeholder delle recensioni se presente
-  const placeholder = document.querySelector('.cookie-placeholder');
-  if(placeholder) placeholder.style.display = 'none';
 }
 
 /* Toast */
 function showToast(message) {
   const toast = document.createElement("div");
   toast.className = "toast";
+  toast.setAttribute("role", "status");
   toast.textContent = message;
   document.body.appendChild(toast);
   setTimeout(() => toast.remove(), 3000);

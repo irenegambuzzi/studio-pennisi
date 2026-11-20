@@ -6,6 +6,18 @@
   <title>Studio Legale - Avv. Sonia Pennisi</title>
   <meta name="description" content="Avv. Sonia Pennisi - Consulenza e assistenza legale in diritto civile, responsabilità civile, recupero crediti, diritto di famiglia e del lavoro. Studio Legale a Mirandola (MO).">
 
+  <!-- Anteprima social (WhatsApp, Facebook, LinkedIn, X) -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:url" content="https://studiolegalepennisi.com/">
+  <meta property="og:title" content="Avv. Sonia Pennisi | Studio legale a Mirandola">
+  <meta property="og:description" content="Avv. Sonia Pennisi - Consulenza e assistenza legale in diritto civile, responsabilità civile, recupero crediti, diritto di famiglia e del lavoro. Studio Legale a Mirandola (MO).">
+  <meta property="og:image" content="https://studiolegalepennisi.com/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Logo dello Studio Legale e ritratto dell'Avv. Sonia Pennisi">
+  <meta name="twitter:card" content="summary_large_image">
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +28,7 @@
 
   <!-- Favicon -->
   <link rel="icon" href="images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 
   <!-- Google Analytics -->
   <script type="text/plain" data-cookiecategory="analytics" async src="https://www.googletagmanager.com/gtag/js?id=G-V9S8GW0M4B"></script>
@@ -32,7 +45,7 @@
     <div class="cookie-content">
       <h3>Informativa sui Cookie</h3>
       <p>
-        Utilizziamo cookie tecnici per il funzionamento del sito e, previo tuo consenso, cookie di analisi e widget di terze parti. Cliccando "Accetta Tutti" acconsenti all'uso di tutti i cookie. Cliccando "Rifiuta" manterrai le impostazioni di default (solo tecnici).
+        Utilizziamo cookie tecnici per il funzionamento del sito e, previo tuo consenso, cookie di analisi. Cliccando "Accetta Tutti" acconsenti all'uso di tutti i cookie. Cliccando "Rifiuta" manterrai le impostazioni di default (solo tecnici).
       </p>
       <div class="cookie-buttons">
         <button type="button" onclick="handleCookies('all')" class="btn-accept">Accetta Tutti</button>
@@ -50,9 +63,15 @@
           <img src="images/logo.png" alt="Logo Studio Legale Sonia Pennisi">
         </a>
       </div>
-      <nav class="nav-menu" aria-label="Navigazione principale">
+      <button type="button" class="nav-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Apri il menù">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav id="site-nav" class="nav-menu" aria-label="Navigazione principale">
         <a href="#about">Lo Studio</a>
         <a href="#areas">Competenze</a>
+        <a href="#primo-appuntamento">Primo appuntamento</a>
         <a href="#reviews">Recensioni</a>
         <a href="#contact">Contatti</a>
       </nav>
@@ -61,14 +80,17 @@
 
   <!-- Hero -->
   <section id="hero" class="hero">
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-      <h1>Avv. Sonia Pennisi</h1>
-      <p>Consulenza e assistenza legale civile e familiare a Mirandola</p>
-      <a href="#contact" class="cta-btn">Richiedi un appuntamento</a>
-    </div>
-    <div class="hero-bg">
-      <img src="images/avvocato.jpg" alt="Avvocato Sonia Pennisi - Studio Legale">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <p class="hero-eyebrow">Studio legale</p>
+        <h1>Avv. Sonia Pennisi</h1>
+        <p class="hero-sub">Consulenza e assistenza legale civile e familiare a Mirandola</p>
+        <a href="#contact" class="cta-btn">Richiedi un appuntamento</a>
+        <p class="hero-note">Via Pico 16, Mirandola (MO) · Si riceve solo su appuntamento</p>
+      </div>
+      <figure class="hero-photo">
+        <img src="images/avvocato.jpg" width="947" height="1400" alt="Avv. Sonia Pennisi nel suo studio a Mirandola" fetchpriority="high">
+      </figure>
     </div>
   </section>
 
@@ -128,13 +150,39 @@
     </div>
   </section>
 
+  <!-- Primo appuntamento -->
+  <section id="primo-appuntamento" class="steps">
+    <div class="container">
+      <h2>Come funziona il primo appuntamento</h2>
+      <ol class="steps-grid">
+        <li class="step-card">
+          <span class="step-num" aria-hidden="true">1</span>
+          <h3>Il primo contatto</h3>
+          <p><a href="tel:+39053521019">Telefona</a>, scrivi un'<a href="mailto:avvocato@studiolegalepennisi.com">email</a> o compila il <a href="#contact">modulo di contatto</a> per fissare un appuntamento. Lo studio riceve solo su appuntamento.</p>
+        </li>
+        <li class="step-card">
+          <span class="step-num" aria-hidden="true">2</span>
+          <h3>Il colloquio in studio</h3>
+          <p>Ascolto la tua situazione ed esaminiamo insieme la documentazione. Porta con te tutti i documenti che riguardano la questione.</p>
+        </li>
+        <li class="step-card">
+          <span class="step-num" aria-hidden="true">3</span>
+          <h3>Le possibili strade</h3>
+          <p>Ti spiego con chiarezza le opzioni percorribili e i relativi costi, prima di procedere.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
   <!-- Recensioni -->
   <section id="reviews" class="reviews">
-    <div class="container">
-      <h2>Dicono di noi</h2>
-      <!-- Elfsight Google Reviews | Untitled Google Reviews -->
-      <script src="https://elfsightcdn.com/platform.js" async></script>
-      <div class="elfsight-app-b5f14944-ba35-40d6-bdd1-84d76ddc5d5a" data-elfsight-app-lazy></div>
+    <div class="container reviews-inner">
+      <h2>Recensioni</h2>
+      <p>Le opinioni di chi si è affidato allo studio, raccolte su Google.</p>
+      <a href="https://www.google.com/maps?cid=15870159052896191363" class="btn-outline" target="_blank" rel="noopener noreferrer">
+        Leggi le recensioni su Google<span class="visually-hidden"> (si apre in una nuova scheda)</span>
+        <svg class="icon-external" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="16" height="16"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
   </section>
 
@@ -181,11 +229,11 @@
         <img src="images/logo.png" alt="Logo Studio Legale Pennisi" class="logo-small">
       </div>
       <div class="footer-info">
-        <p>© 2024 Studio Legale Avv. Sonia Pennisi - Via Pico 16, Mirandola (MO)</p>
+        <p>© <span id="currentYear">2026</span> Studio Legale Avv. Sonia Pennisi - Via Pico 16, Mirandola (MO)</p>
         <p>P.I. 02638140364 | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookie-policy.html">Cookie Policy</a></p>
         <p>Si riceve solo su appuntamento</p>
         <p>Email: <a href="mailto:avvocato@studiolegalepennisi.com">avvocato@studiolegalepennisi.com</a></p>
-        <p>Tel: 0535 21019</p>
+        <p>Tel: <a href="tel:+39053521019">0535 21019</a></p>
       </div>
     </div>
   </footer>
